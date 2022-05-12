@@ -32,38 +32,37 @@ int main(void)
 }
 BTNode* CreateBT1(const char* pre, const char* in, int n)
 {
-	BTNode* b = new BTNode;
+	BTNode* node = new BTNode;
 	if (n <= 0)
 		return nullptr;
-	b->data = *pre;
+	node->data = *pre;
 	const char* p;
 	for (p = in; p < in + n; p++)
-	{
-		if (*p == *pre)
+		if (*p == *pre)//只有先找到父节点才能确认他的孩子节点
 			break;
-	}
 	int k = p - in;
-	b->lchild = CreateBT1(pre+1, in, k);//构造左子树
-	b->rchild = CreateBT1(pre + k + 1, p + 1, n - k - 1);//构造右子树
-	return b;
+	node->lchild = CreateBT1(pre + 1, in, k);//前序便利里面只有左子树就在左边，右子树就在右边，但是第一个节点是根节点.
+	node->rchild = CreateBT1(pre + k + 1, p + 1, n - k - 1);//pre+k+1是跳到第一个右节点，p+1也是在中序里面跳到第一个右节点n-k-是右子树的节点个数
+	return node;
+
  }
 BTNode* CreateBT2(const char* post, const char* in, int n)
 {
-	BTNode* b = new BTNode;
+	BTNode* node = new BTNode;
 	if (n <= 0)
 		return nullptr;
+	
 	char r = *(post + n - 1);
-	b->data = r;
+	node->data = r;
 	const char* p;
 	for (p = in; p < in + n; p++)
-	{
-		if (*p == r)
+		if (*p == r)//找到父节点 才能在中序里确认他的孩子节点
 			break;
-	}
 	int k = p - in;
-	b->lchild = CreateBT2(post, in, k);
-	b->rchild = CreateBT2(post + k, p + 1, n - k - 1);
-	return b;
+	node->lchild=CreateBT2(post, in, k);//post没有动因为post 开头就是左子树，k是左子树的节点个数。
+	node->rchild = CreateBT2(post + k, p + 1, n - k - 1);//post指针移到属于右子树的一端,n-1-k是右子树的节点数
+	return node;
+
 }
 void PreOrderDisPlay(const BTNode* Tree)
 {

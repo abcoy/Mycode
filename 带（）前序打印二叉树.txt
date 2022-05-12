@@ -1,0 +1,17 @@
+void DispBTree(BTNode *b)
+{
+    /********** Begin **********/
+    if(!b)
+    return;
+    cout<<b->data;
+    if(b->lchild||b->rchild)
+    cout<<'(';//节点有孩子才打印（）
+    DispBTree(b->lchild);
+    if(b->rchild)
+    cout<<',';//这个节点有右孩子才打印,
+    DispBTree(b->rchild);
+    if(b->rchild||b->lchild)
+    cout<<')';//一直往上返回节点有孩子才会有（）;
+    
+    /********** End **********/    
+}

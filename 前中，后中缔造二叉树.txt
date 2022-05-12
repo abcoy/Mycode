@@ -1,0 +1,92 @@
+#include<iostream>
+using namespace std;
+struct BTNode
+{
+	char data;
+	BTNode* lchild, *rchild;
+};
+BTNode* CreateBT1(const char* pre, const char* in, int n);
+BTNode* CreateBT2(const char* post, const char* in, int n);
+void PreOrderDisPlay(const BTNode* Tree);
+void InOrderDisPlay(const BTNode* Tree);
+void PostOrderDisplay(const BTNode* Tree);
+int main(void)
+{
+	cout << "CreateBT1:\n ";
+	BTNode* Treee = CreateBT1("ABDGCEF","DGBAECF",8);
+	cout << "前序遍历: ";
+	PreOrderDisPlay(Treee);
+	cout << endl;
+	cout << "中序遍历: ";
+	InOrderDisPlay(Treee);
+	cout << "\nCreateBT2: ";
+	BTNode* Tree = CreateBT2("GDBEFCA", "DGBAECF", 8);
+	cout << "\n中序遍历: ";
+	InOrderDisPlay(Tree);
+	cout << endl;
+	cout << "后序遍历: ";
+	PostOrderDisplay(Tree);
+	return 0;
+	
+	
+}
+BTNode* CreateBT1(const char* pre, const char* in, int n)
+{
+	BTNode* b = new BTNode;
+	if (n <= 0)
+		return nullptr;
+	b->data = *pre;
+	const char* p;
+	for (p = in; p < in + n; p++)
+	{
+		if (*p == *pre)
+			break;
+	}
+	int k = p - in;
+	b->lchild = CreateBT1(pre+1, in, k);//构造左子树
+	b->rchild = CreateBT1(pre + k + 1, p + 1, n - k - 1);//构造右子树
+	return b;
+ }
+BTNode* CreateBT2(const char* post, const char* in, int n)
+{
+	BTNode* b = new BTNode;
+	if (n <= 0)
+		return nullptr;
+	char r = *(post + n - 1);
+	b->data = r;
+	const char* p;
+	for (p = in; p < in + n; p++)
+	{
+		if (*p == r)
+			break;
+	}
+	int k = p - in;
+	b->lchild = CreateBT2(post, in, k);
+	b->rchild = CreateBT2(post + k, p + 1, n - k - 1);
+	return b;
+}
+void PreOrderDisPlay(const BTNode* Tree)
+{
+	if (!Tree)
+		return;
+	cout << Tree->data;
+	PreOrderDisPlay(Tree->lchild);
+	PreOrderDisPlay(Tree->rchild);
+}
+void InOrderDisPlay(const BTNode* Tree)
+{
+	if (!Tree)
+		return;
+	InOrderDisPlay(Tree->lchild);
+	cout << Tree->data;
+	InOrderDisPlay(Tree->rchild);
+}
+
+void PostOrderDisplay(const BTNode* Tree)
+{
+	if (!Tree)
+		return;
+	PostOrderDisplay(Tree->lchild);
+	PostOrderDisplay(Tree->rchild);
+	cout << Tree->data;
+}

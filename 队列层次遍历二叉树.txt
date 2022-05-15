@@ -1,0 +1,28 @@
+void HierarchyOrder(BiTreeNode* root)
+// 二叉树的层次遍历（队列实现）
+// 参数：二叉树根节点root
+// 输出：二叉树的层次遍历，中间没有空格，末尾不换行。
+{
+    // 请在这里补充代码，完成本关任务
+    /********** Begin *********/
+    queue<BiTreeNode*>que;
+    if(!root)
+    return;
+    que.push(root);
+    while(!que.empty())
+    {
+        cout<<que.front()->data;
+        if(que.front()->left)
+        {
+            que.push(que.front()->left);
+        }
+        if(que.front()->right)
+        {
+            que.push(que.front()->right);
+        }
+        que.pop();
+    }
+
+    /********** End **********/
+
+}

@@ -1,0 +1,45 @@
+int BiTreeDepth(BiTree T)
+{	 // 初始条件：二叉树T存在。操作结果：返回T的深度
+    /********** Begin **********/ 
+	if(!T)
+	return 0;
+	int lnumbers;
+	int rnumbers;
+	lnumbers =  BiTreeDepth(T->lchild);
+	rnumbers =  BiTreeDepth(T->rchild);
+	return lnumbers>rnumbers?lnumbers+1:rnumbers+1;
+     /********** End **********/
+}
+
+int i;
+int NodeCount(BiTree T)
+{
+	//初始条件：二叉树T存在。操作结果：返回T的结点数
+    /********** Begin **********/
+	if(!T)
+	return 0;
+	else
+	{
+		i++;
+		NodeCount(T->lchild);
+		NodeCount(T->rchild);
+	}
+	return i;
+    /********** End **********/
+}
+
+int leafCount;
+int LeafNodeCount(BiTree T)
+{
+	//初始条件：二叉树T存在。操作结果：返回T的叶子结点数
+    /********** Begin **********/
+	if(T)
+	{
+		if(!T->lchild&&!T->rchild)
+		leafCount++;
+		LeafNodeCount(T->lchild);
+		LeafNodeCount(T->rchild);
+	}
+	return leafCount;
+	/********** End **********/
+}

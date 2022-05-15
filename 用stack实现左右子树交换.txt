@@ -1,0 +1,34 @@
+BiTreeNode* BiTreeChangeStack(BiTreeNode* root)
+// 实现二叉树左右子树的交换（栈实现）
+// 参数：二叉树根节点root
+// 返回：二叉树
+{
+    // 请在这里补充代码，完成本关任务
+    /********** Begin *********/
+     stack<BiTreeNode*>sta;
+     if(!root)
+     return nullptr;
+     BiTreeNode*temp,*node;
+     node = root;
+     sta.push(root);
+     while(!sta.empty())
+     {
+         temp = node->left;
+         node->left = node->right;
+         node->right = temp;
+         if(node->right)
+         {
+             sta.push(node->right);
+         }
+         if(node->left)
+         {
+             node = node->left;
+         }
+         else{
+             node = sta.top();
+             sta.pop();
+         }
+     }//一棵子树一棵子树完成交换
+     return node;
+    /********** End **********/
+}

@@ -42,7 +42,7 @@ BTNode* CreateBT1(const char* pre, const char* in, int n)
 			break;
 	int k = p - in;
 	node->lchild = CreateBT1(pre + 1, in, k);//前序便利里面只有左子树就在左边，右子树就在右边，但是第一个节点是根节点.
-	node->rchild = CreateBT1(pre + k + 1, p + 1, n - k - 1);//pre+k+1是跳到第一个右节点，p+1也是在中序里面跳到第一个右节点n-k-是右子树的节点个数
+	node->rchild = CreateBT1(pre + k + 1, p + 1, n - k - 1);//pre+k+1是跳到第一个右节点，p+1也是在中序里面跳到第一个右节点n-k-1 是右子树的节点个数
 	return node;
 
  }

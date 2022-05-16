@@ -23,7 +23,7 @@ BiTreeNode* BiTreeChangeStack(BiTreeNode* root)
          if(node->left)
          {
              node = node->left;
-         }
+         }//如果左子树有，则交换左子树的左右节点
          else{
              node = sta.top();
              sta.pop();

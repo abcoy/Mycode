@@ -1,0 +1,20 @@
+ListNode* sortInList(ListNode* head) {
+        // write code here
+        vector<int>temp;
+        ListNode*p = head;
+        while(p)
+        {
+            temp.push_back(p->val);
+            p = p->next;
+        }
+        sort(temp.begin(),temp.end());
+        int i = 0;
+         p =head;
+        while(p)
+        {
+            p->val = temp[i];
+            p = p->next;
+            i++;
+        }
+        return head;
+    }

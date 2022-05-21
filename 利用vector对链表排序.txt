@@ -17,4 +17,4 @@ ListNode* sortInList(ListNode* head) {
             i++;
         }
         return head;
-    }
+    }//写代码过程中可已利用STL的算法或者容器进行辅助

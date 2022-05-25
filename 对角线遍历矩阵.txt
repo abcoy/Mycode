@@ -1,0 +1,33 @@
+vector<int> findDiagonalOrder(vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        int i = 0;//在我看来 i是用来记录以及遍历了几条对角线好以此来结束循环，因为i= m+n-1，且i= x+yx+y
+        vector<int>vec;
+        while(i < m+n)
+        {
+            //第1 3 5 ...条对角线
+            int x1 = i < m?i:m-1;//x+y= i的 且趟数为 i+1趟要么是下x(行)--，y(列)++，
+                                //要么x(行)++，y(列)--，循环结束条件是行或者列达到最大或者最小值
+            int y1 = i- x1;
+            while(x1>=0&&y1<n)
+            {
+                vec.push_back(mat[x1][y1]);
+                x1--;
+                y1++;
+            }
+            i++;
+            if(i>=m+n)
+            break;
+            //第2 4 6...条对角线 是从行（加加）到列（减减）
+            int y2 = i < n?i:n-1;
+            int x2 = i-y2;
+            while(y2>=0&&x2<m)
+            {
+                vec.push_back(mat[x2][y2]);
+                x2++;
+                y2--;
+            }
+            i++;
+        }
+        return vec;
+    }

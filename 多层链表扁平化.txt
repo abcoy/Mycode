@@ -1,0 +1,26 @@
+//多层链表扁平化个人错误解法 第22个测试集过不了
+Node* Flat(Node* head)
+{
+    if (!head)
+        return head;
+    Node* ptr = head;
+    while (ptr->next)
+    {
+        if (ptr->child)
+        {
+            Node* next = ptr->next;
+            Node* node = Flat(ptr->child);
+            ptr->next = ptr->child;
+            ptr->child->prev = ptr;
+            node->next = next;
+            next->prev = node;
+            ptr->child = nullptr;
+        }
+        ptr = ptr->next;
+    }
+    return ptr;
+}
+Node* flatten(Node* head) {
+    Flat(head);
+    return head;
+}

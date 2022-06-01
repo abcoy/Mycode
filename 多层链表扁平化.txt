@@ -24,3 +24,94 @@ Node* flatten(Node* head) {
     Flat(head);
     return head;
 }
+//利用迭代方式
+////
+Node* flatten(Node* head) {//递归方法解题
+        Node *curr = head;
+        while(curr!=nullptr&&curr->child==nullptr)//一直遍历链表 如果有孩子链表则停止
+        curr = curr->next;
+        if(curr==nullptr)//如果已经遍历到最后一个节点就返回
+        return head;//返回的是链表的头节点
+            /*有孩子则一直递归*/
+        Node*newhead = flatten(curr->child);//因为返回的是一个头节点 所以用newhead来标注新链表的头节点
+        Node*tail = foundtail(newhead);//找到这条链表的尾节点
+        newhead->prev = curr;//然后进行插入,孩子链表的的前驱节点就是curr因为curr->child == newhead;
+        if(curr->next)//如果curr->next(curr不是尾节点)则要进行中间插入
+        {
+            tail->next = curr->next;
+            curr->next->prev = tail;//
+        }
+        curr->next = newhead;//curr节点的next为该节点的孩子链表头节点
+        curr->child = nullptr;//孩子指针指向nullptr
+        return head;
+        
+    }
+    Node*foundtail(Node*head)
+    {
+        if(head==nullptr||head->next==nullptr)
+        return head;
+        Node*curr = head;
+        while(curr->next)
+        curr = curr->next;
+        return curr;
+    }
+    
+    //别人的递归 学习一下
+    ///////
+    Node* flatten(Node* head) {//递归方法解题
+        Node *curr = head;
+        while(curr!=nullptr&&curr->child==nullptr)//一直遍历链表 如果有孩子链表则停止
+        curr = curr->next;
+        if(curr==nullptr)//如果已经遍历到最后一个节点就返回
+        return head;//返回的是链表的头节点
+            /*有孩子则一直递归*/
+        Node*newhead = flatten(curr->child);//因为返回的是一个头节点 所以用newhead来标注新链表的头节点
+        Node*tail = foundtail(newhead);//找到这条链表的尾节点
+        newhead->prev = curr;//然后进行插入,孩子链表的的前驱节点就是curr因为curr->child == newhead;
+        if(curr->next)//如果curr->next(curr不是尾节点)则要进行中间插入
+        {
+            tail->next = curr->next;
+            curr->next->prev = tail;//
+        }
+        curr->next = newhead;//curr节点的next为该节点的孩子链表头节点
+        curr->child = nullptr;//孩子指针指向nullptr
+        return head;
+        
+    }
+    Node*foundtail(Node*head)
+    {
+        if(head==nullptr||head->next==nullptr)
+        return head;
+        Node*curr = head;
+        while(curr->next)
+        curr = curr->next;
+        return curr;
+    }Node* flatten(Node* head) {//递归方法解题
+        Node *curr = head;
+        while(curr!=nullptr&&curr->child==nullptr)//一直遍历链表 如果有孩子链表则停止
+        curr = curr->next;
+        if(curr==nullptr)//如果已经遍历到最后一个节点就返回
+        return head;//返回的是链表的头节点
+            /*有孩子则一直递归*/
+        Node*newhead = flatten(curr->child);//因为返回的是一个头节点 所以用newhead来标注新链表的头节点
+        Node*tail = foundtail(newhead);//找到这条链表的尾节点
+        newhead->prev = curr;//然后进行插入,孩子链表的的前驱节点就是curr因为curr->child == newhead;
+        if(curr->next)//如果curr->next(curr不是尾节点)则要进行中间插入
+        {
+            tail->next = curr->next;
+            curr->next->prev = tail;//
+        }
+        curr->next = newhead;//curr节点的next为该节点的孩子链表头节点
+        curr->child = nullptr;//孩子指针指向nullptr
+        return head;
+        
+    }
+    Node*foundtail(Node*head)
+    {
+        if(head==nullptr||head->next==nullptr)
+        return head;
+        Node*curr = head;
+        while(curr->next)
+        curr = curr->next;
+        return curr;
+    }
